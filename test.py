@@ -78,7 +78,7 @@ def serial_reader():
                     # Parse STATE messages to update light states
                     parsed_states = parse_state_line(line)
                     if parsed_states:
-                        # Update our latest state with the new data
+                        # Update latest state with the new data
                         for light, states in parsed_states.items():
                             if light in latest_state:
                                 latest_state[light].update(states)
@@ -98,7 +98,7 @@ def index():
         port=serial_connection.port if serial_connection else "Not connected",
         commands=arduino_commands,
         serial_output=serial_output,
-        is_paused=False  # You'll need to track this from Arduino messages
+        is_paused=False  # track from Arduino messages
     )
 
 @app.route('/send_command', methods=['POST'])
@@ -130,7 +130,7 @@ def main():
     global serial_connection
     
     # Try to find and connect to Arduino
-    port = "COM7"  # Or use find_arduino_port()
+    port = "COM7" 
     if port:
         try:
             serial_connection = serial.Serial(port, 115200, timeout=1)
@@ -151,4 +151,5 @@ def main():
     app.run(host='0.0.0.0', port=5000, debug=False)
 
 if __name__ == '__main__':
+
     main()
